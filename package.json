@@ -3,13 +3,36 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "cross-env NODE_ENV=development node server.js",
     "build": "next build",
-    "start": "next start"
+    "start": "cross-env NODE_ENV=development node server.js"
   },
   "dependencies": {
+    "@ant-design/compatible": "^1.0.8",
+    "@ant-design/pro-layout": "^6.17.1",
+    "@zeit/next-less": "^1.0.1",
+    "antd": "^4.15.3",
+    "express": "^4.17.1",
+    "isomorphic-unfetch": "^3.0.0",
+    "less": "^4.1.1",
+    "moment": "^2.29.0",
     "next": "10.2.0",
+    "next-plugin-antd-less": "^1.1.4",
+    "next-redux-wrapper": "^3.0.0-alpha.3",
+    "querystring": "^0.2.0",
     "react": "17.0.2",
-    "react-dom": "17.0.2"
+    "react-dom": "17.0.2",
+    "react-redux": "^7.1.0",
+    "redux": "^4.0.4",
+    "redux-devtools-extension": "^2.13.8",
+    "redux-logger": "^3.0.6",
+    "redux-persist": "^5.10.0",
+    "redux-thunk": "^2.3.0",
+    "url-parse": "^1.5.1"
+  },
+  "devDependencies": {
+    "cross-env": "^7.0.2",
+    "http-proxy-middleware": "^0.19.1",
+    "webpack": "^4.46.0"
   }
 }
