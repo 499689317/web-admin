@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { SmileOutlined, CrownOutlined } from '@ant-design/icons';
+import { TeamOutlined, GiftFilled, ShoppingFilled } from '@ant-design/icons';
 
 import dynamic from 'next/dynamic'
 const LayoutBasic = dynamic(() => import('../components/layout/basic'), {
@@ -18,42 +18,38 @@ const menuData = {
       {
         path: '/player',
         name: '用户管理',
-        icon: <CrownOutlined />,
+        icon: <TeamOutlined />,
         access: 'canAdmin',
         routes: [
           {
             path: '/player/list',
             name: '玩家数据详情',
-            icon: <CrownOutlined />
           },
           {
             path: '/player/behavior',
             name: '玩家打点行为',
-            icon: <CrownOutlined />
           }
         ],
       },
       {
         path: '/activity',
         name: '活动管理',
-        icon: <SmileOutlined />,
+        icon: <GiftFilled />,
         routes: [
           {
             path: '/activity/list',
             name: '活动列表',
-            icon: <CrownOutlined />
           }
         ],
       },
       {
         path: '/shop',
         name: '商店管理',
-        icon: <SmileOutlined />,
+        icon: <ShoppingFilled />,
         routes: [
           {
             path: '/shop/list',
             name: '商品列表',
-            icon: <CrownOutlined />
           }
         ],
       },

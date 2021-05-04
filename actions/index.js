@@ -1,4 +1,6 @@
-import { showMessage, HttpResponse, needLogin } from '../lib'
+import parse from 'url-parse'
+import Router from 'next/router'
+import { showMessage, HttpResponse } from '../lib'
 
 export * from './account'
 
@@ -13,7 +15,15 @@ export const resetAction = () => {
 export function handleActionError(error) {
     if (error instanceof HttpResponse) {
         if (error.status === 401) {
-            needLogin()
+            Router.replace(parse.format({
+                pathname: '/login',
+                query: {
+                    from: parse.format({
+                        pathname: Router.pathname,
+                        query: Router.query
+                    })
+                }
+            }))
         } else {
             showMessage(error.message)
         }

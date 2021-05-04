@@ -1,12 +1,12 @@
 import { SET_ACCOUNT_INFO_ACTION } from '../../actions'
 
 const initialState = {
-    "user": {
-        "id": 0,
-        "nickname": '',
-        "password": '',
-        "author": '',
-        "cover": ''
+    user: {
+        id: 0,
+        nickname: '',
+        password: '',
+        auth: '',
+        cover: ''
     }
 }
 
