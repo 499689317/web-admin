@@ -34,11 +34,11 @@ class _LoginForm extends React.Component {
 
             let { username, password } = values
             this.setState({ isSubmitting: true })
-            dispatch(loginAction({ username, password }))
-                .then(resp => {
-                    this.setState({ isSubmitting: false })
-                    Router.replace(Router.query.from || '/')
-                })
+            // dispatch(loginAction({ username, password }))
+            //     .then(resp => {
+            //         this.setState({ isSubmitting: false })
+            Router.replace(Router.query.from || '/')
+            // })
         })
     }
 

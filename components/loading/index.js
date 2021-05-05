@@ -18,13 +18,13 @@ function Loading(props) {
                     null}
 
                 <style jsx>{`
-           .root {
-             display: flex;
-             flex-direction: column;
-             justify-content: center;
-             align-items: center;
-           }
-         `}</style>
+            .root {
+              display: flex;
+              flex-direction: column;
+              justify-content: center;
+              align-items: center;
+            }
+          `}</style>
             </div>
         </Layout>
     )

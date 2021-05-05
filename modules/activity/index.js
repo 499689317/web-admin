@@ -4,7 +4,10 @@ import { connect } from 'react-redux'
 import { Table, Button, Drawer, Popconfirm } from 'antd'
 import moment from 'moment'
 
+import { getColumnSearchProps } from '../../components'
 import EditComponent from './edit'
+
+import { onPageChange, onTableChange } from '../../lib'
 
 const list = [
     {
@@ -41,15 +44,6 @@ class ActivityComponent extends React.Component {
         Object.assign(this.state, { list })
     }
 
-    onPageChange = (page, pageSize) => {
-        Router.push({
-            pathname: Router.pathname,
-            query: Object.assign({ ...Router.query }, {
-                offset: (page - 1) * pageSize,
-            }),
-        })
-    }
-
     render() {
         const bodyHeight = document.body.clientHeight;
         const headerHeight = document.getSelection('.ant-pro-global-header').clientHeight || 64;
@@ -61,12 +55,14 @@ class ActivityComponent extends React.Component {
                 dataIndex: 'id',
                 key: 'id',
                 width: 100,
+                ...getColumnSearchProps('id'),
             },
             {
                 title: '活动类型',
                 dataIndex: 'type',
                 key: 'type',
                 width: 100,
+                ...getColumnSearchProps('type'),
             },
             {
                 title: '开始时间',
@@ -135,7 +131,8 @@ class ActivityComponent extends React.Component {
                     bordered
                     scroll={{ x: 1980, y: tableHeight }}
                     onChange={(pagination, filters, sorter) => {
-                        console.log(pagination, filters, sorter)
+                        const tableChange = onTableChange(pagination, filters, sorter);
+                        this.setState({ current: tableChange.current });
                     }}
                 >
                 </Table>

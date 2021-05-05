@@ -3,7 +3,10 @@ import Router from 'next/router'
 import { connect } from 'react-redux'
 import { Table, Button, Drawer, Popconfirm } from 'antd'
 
+import { getColumnSearchProps } from '../../components'
 import EditComponent from './edit'
+
+import { onPageChange, onTableChange } from '../../lib'
 
 const list = [
     {
@@ -45,15 +48,6 @@ class ShopComponent extends React.Component {
         Object.assign(this.state, { list })
     }
 
-    onPageChange = (page, pageSize) => {
-        Router.push({
-            pathname: Router.pathname,
-            query: Object.assign({ ...Router.query }, {
-                offset: (page - 1) * pageSize,
-            }),
-        })
-    }
-
     render() {
         const bodyHeight = document.body.clientHeight;
         const headerHeight = document.getSelection('.ant-pro-global-header').clientHeight || 64;
@@ -65,30 +59,35 @@ class ShopComponent extends React.Component {
                 dataIndex: 'id',
                 key: 'id',
                 width: 100,
+                ...getColumnSearchProps('id'),
             },
             {
                 title: '商品名称',
                 dataIndex: 'name',
                 key: 'name',
                 width: 100,
+                ...getColumnSearchProps('name')
             },
             {
                 title: '价格',
                 dataIndex: 'price',
                 key: 'price',
                 width: 100,
+                sorter: true,
             },
             {
                 title: '商品类型',
                 dataIndex: 'type',
                 key: 'type',
                 width: 100,
+                ...getColumnSearchProps('type'),
             },
             {
                 title: '数量',
                 dataIndex: 'count',
                 key: 'count',
                 width: 100,
+                sorter: true,
             },
             {
                 title: '赠品',
@@ -146,7 +145,8 @@ class ShopComponent extends React.Component {
                     bordered
                     scroll={{ x: 1980, y: tableHeight }}
                     onChange={(pagination, filters, sorter) => {
-                        console.log(pagination, filters, sorter)
+                        const tableChange = onTableChange(pagination, filters, sorter);
+                        this.setState({ current: tableChange.current });
                     }}
                 >
                 </Table>

@@ -4,7 +4,10 @@ import { connect } from 'react-redux'
 import { Table, Button, Drawer } from 'antd'
 import moment from 'moment'
 
+import { getColumnSearchProps } from '../../components'
 import EditComponent from './edit'
+
+import { onPageChange, onTableChange } from '../../lib'
 import { getUserInfo } from '../../actions'
 
 const list = [
@@ -46,15 +49,6 @@ class PlayerComponent extends React.Component {
         Object.assign(this.state, { list })
     }
 
-    onPageChange = (page, pageSize) => {
-        Router.push({
-            pathname: Router.pathname,
-            query: Object.assign({ ...Router.query }, {
-                offset: (page - 1) * pageSize,
-            }),
-        })
-    }
-
     render() {
         const bodyHeight = document.body.clientHeight;
         const headerHeight = document.getSelection('.ant-pro-global-header').clientHeight || 64;
@@ -66,12 +60,14 @@ class PlayerComponent extends React.Component {
                 dataIndex: 'id',
                 key: 'id',
                 width: 100,
+                ...getColumnSearchProps('id'),
             },
             {
                 title: '用户昵称',
                 dataIndex: 'nickname',
                 key: 'nickname',
                 width: 100,
+                ...getColumnSearchProps('nickname'),
             },
             {
                 title: '充值金额',
@@ -146,6 +142,8 @@ class PlayerComponent extends React.Component {
                     scroll={{ x: 1980, y: tableHeight }}
                     onChange={(pagination, filters, sorter) => {
                         console.log(pagination, filters, sorter)
+                        const tableChange = onTableChange(pagination, filters, sorter);
+                        this.setState({ current: tableChange.current });
                     }}
                 >
                 </Table>

@@ -4,15 +4,22 @@
 import React from 'react';
 import ProLayout, { PageContainer } from '@ant-design/pro-layout';
 
+import AvatarComponent from './avatar'
+
 export default function LayoutBasic({ menuData, pathname, onClick, children }) {
     return (
         <div style={{ height: '100vh' }}>
             <ProLayout
-                title='Jackpot Craze'
+                title='Devin'
                 logo='/favicon.ico'
                 navTheme='light'
+                waterMarkProps={{ content: 'Devin' }}
+                fixSiderbar
                 {...menuData}
                 location={{ pathname }}
+                rightContentRender={() => (
+                    <AvatarComponent />
+                )}
                 menuItemRender={(item, dom) => (
                     <a
                         onClick={() => {
@@ -22,9 +29,13 @@ export default function LayoutBasic({ menuData, pathname, onClick, children }) {
                         {dom}
                     </a>
                 )}
-                fixSiderbar
             >
-                {children}
+                <PageContainer
+                    ghost
+                    header={{ breadcrumb: {} }}
+                >
+                    {children}
+                </PageContainer>
             </ProLayout>
         </div>
     )
