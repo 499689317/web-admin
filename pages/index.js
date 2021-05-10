@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { TeamOutlined, GiftFilled, ShoppingFilled } from '@ant-design/icons';
+import { TeamOutlined, GiftFilled, ShoppingFilled, SketchCircleFilled } from '@ant-design/icons';
 
 import dynamic from 'next/dynamic'
 const LayoutBasic = dynamic(() => import('../components/layout/basic'), {
@@ -9,12 +9,28 @@ const LayoutBasic = dynamic(() => import('../components/layout/basic'), {
 import PlayerComponent from '../modules/player'
 import ActivityComponent from '../modules/activity'
 import ShopComponent from '../modules/shop'
+import { TaskPanelComponent, DailyTaskComponent } from '../modules/dailytask'
 
 
 const menuData = {
   route: {
     path: '/',
     routes: [
+      {
+        path: '/dailytask',
+        name: '任务管理',
+        icon: <SketchCircleFilled />,
+        routes: [
+          {
+            path: '/dailytask/list',
+            name: '面板列表',
+          },
+          {
+            path: '/dailytask/task',
+            name: '任务列表',
+          }
+        ],
+      },
       {
         path: '/player',
         name: '用户管理',
@@ -64,12 +80,12 @@ class IndexPage extends React.Component {
 
   constructor(props) {
     super(props)
-    Object.assign(this.state, { pathname: '/player/list' })
+    Object.assign(this.state, { pathname: '/dailytask/list' })
   }
 
   render() {
-    console.log(this.state)
-    console.log(this.props)
+    // console.log(this.state)
+    // console.log(this.props)
     return (
       <div>
         <Head>
@@ -80,7 +96,6 @@ class IndexPage extends React.Component {
           menuData={menuData}
           pathname={this.state.pathname}
           onClick={(item, dom) => {
-            console.log(item, dom)
             this.setState({ pathname: item.path })
           }}>
           {
@@ -93,6 +108,10 @@ class IndexPage extends React.Component {
                   return <ActivityComponent />
                 case '/shop/list':
                   return <ShopComponent />
+                case '/dailytask/list':
+                  return <TaskPanelComponent />
+                case '/dailytask/task':
+                  return <DailyTaskComponent />
                 default:
                   return <></>
               }

@@ -18,12 +18,15 @@ module.exports = withAntdLess(
                 mode: 'local',
             },
         },
+        webpack(config) {
+            return config;
+        },
         env: {
             isProd,
             name: 'web-admin',
             version: '0.1.0',
             contactEmail: 'dehu.meng@centurygame.com',
-            hostname: isProd ? 'http://127.0.0.1:8000' : 'http://127.0.0.1:3000'
+            hostname: isProd ? 'http://127.0.0.1:9780' : 'http://127.0.0.1:3000'
         },
         publicRuntimeConfig: {
         },

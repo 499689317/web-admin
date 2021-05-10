@@ -1,10 +1,12 @@
 import { combineReducers } from 'redux'
 
 import { RESET_ACTION } from '../actions'
-import account from './account/index'
+import account from './account'
+import dailytask from './dailytask'
 
 const reducer = combineReducers({
-    account
+    account,
+    dailytask,
 })
 
 const initialState = reducer()

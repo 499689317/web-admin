@@ -5,8 +5,6 @@ import React, { useState } from 'react'
 import { Drawer, Dropdown, Menu, Avatar } from 'antd'
 import { DislikeFilled, LogoutOutlined, UserOutlined } from '@ant-design/icons';
 
-import styles from './avatar.less'
-
 export default function AvatarComponent() {
     const [isShowEdit, setIsShowEdit] = useState(false)
     const menuClick = function (key) {
@@ -38,9 +36,9 @@ export default function AvatarComponent() {
     return (
         <div>
             <Dropdown overlay={menuDropdown}>
-                <span className={styles.accountHeader}>
+                <span>
                     <Avatar size="small" icon={<DislikeFilled />} />
-                    <span className={styles.accountName}>admin</span>
+                    <span>admin</span>
                 </span>
             </Dropdown>
             <Drawer

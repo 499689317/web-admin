@@ -8,7 +8,7 @@ const next = require('next')
 // 把/api为前缀的路径路由到对应api服务器
 const devProxy = {
     '/api': {
-        target: 'http://127.0.0.1:8000',
+        target: 'http://127.0.0.1:9780',
         pathRewrite: { '^/api': '/' },
         changeOrigin: true,
     },

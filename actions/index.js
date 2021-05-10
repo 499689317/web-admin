@@ -3,13 +3,12 @@ import Router from 'next/router'
 import { showMessage, HttpResponse } from '../lib'
 
 export * from './account'
+export * from './dailytask'
 
 export const RESET_ACTION = 'reset_action'
 
 export const resetAction = () => {
-    return {
-        type: RESET_ACTION,
-    }
+    return { type: RESET_ACTION }
 }
 
 export function handleActionError(error) {
