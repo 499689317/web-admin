@@ -77,9 +77,9 @@ class DailyTaskComponent extends React.Component {
                 title: '任务奖励',
                 dataIndex: 'taskRewardData',
                 key: 'taskRewardData',
-                width: 100,
-                render: (lock) => {
-                    return lock ? '未解锁' : '已解锁';
+                width: 200,
+                render: (taskRewardData) => {
+                    return JSON.stringify(taskRewardData);
                 }
             },
             {
@@ -87,14 +87,17 @@ class DailyTaskComponent extends React.Component {
                 dataIndex: 'hasGotReward',
                 key: 'hasGotReward',
                 width: 100,
+                render: (hasGotReward) => {
+                    return hasGotReward ? '已领取' : '未领取';
+                }
             },
             {
                 title: '任务状态',
                 dataIndex: 'taskState',
                 key: 'taskState',
                 width: 100,
-                render: (finish) => {
-                    return finish ? '已完成' : '未完成';
+                render: (taskState) => {
+                    return taskState ? '已完成' : '未完成';
                 }
             },
             {

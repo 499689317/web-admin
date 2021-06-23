@@ -10,10 +10,10 @@ export default function LayoutBasic({ menuData, pathname, onClick, children }) {
     return (
         <div style={{ height: '100vh' }}>
             <ProLayout
-                title='Devin'
+                title='Admin Manager'
                 logo='/favicon.ico'
                 navTheme='light'
-                waterMarkProps={{ content: 'Devin' }}
+                waterMarkProps={{ content: 'Admin Manager' }}
                 fixSiderbar
                 {...menuData}
                 location={{ pathname }}

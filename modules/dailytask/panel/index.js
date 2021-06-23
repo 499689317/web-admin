@@ -36,13 +36,14 @@ class TaskPanelComponent extends React.Component {
     }
 
     // 获取面板列表数据
-    fetchDailyTaskData(playerId) {
+    fetchDailyTaskData(playerId, taskStateId) {
         const { dispatch } = this.props;
         const httpFetch = new HttpFetch({ timeout: 30000 });
         this.setState({ isLoading: true });
         dispatch(getTaskPanelInfoAction({
             httpFetch,
-            playerId
+            playerId,
+            taskStateId,
         })).then(resp => {
             const { stateDataArray, dailyTaskStateUUID, today, rewardList } = resp.data;
             this.setState({ list: stateDataArray, isLoading: false });
@@ -52,11 +53,11 @@ class TaskPanelComponent extends React.Component {
     }
 
     onSearchDailyTask(event) {
-        const { playerId } = this.props.form.getFieldsValue();
-        if (!playerId) {
-            return showMessage('用户id为空');
+        const { playerId, taskStateId } = this.props.form.getFieldsValue();
+        if (!playerId || !taskStateId) {
+            return showMessage('非法参数');
         }
-        this.fetchDailyTaskData(playerId);
+        this.fetchDailyTaskData(playerId, taskStateId);
     }
 
     render() {
@@ -172,6 +173,27 @@ class TaskPanelComponent extends React.Component {
                                         <Input
                                             style={{ width: '250px', textAlign: 'left' }}
                                             placeholder='输入用户id'
+                                            allowClear
+                                        >
+                                        </Input>
+                                    )
+                            }
+                        </Form.Item>
+                        <Form.Item>
+                            {
+                                getFieldDecorator('taskStateId', {
+                                    initialValue: '',
+                                    rules: [
+                                        {
+                                            required: true,
+                                            message: '用户id不能为空'
+                                        }
+                                    ]
+                                })
+                                    (
+                                        <Input
+                                            style={{ width: '250px', textAlign: 'left' }}
+                                            placeholder='输入任务id'
                                             allowClear
                                         >
                                         </Input>

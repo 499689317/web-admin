@@ -16,10 +16,10 @@ export const setDailyTaskInfoAction = (payload) => {
     }
 }
 // 任务面板列表
-export const getTaskPanelInfoAction = ({ httpFetch } = {}) =>
+export const getTaskPanelInfoAction = ({ httpFetch, playerId, taskStateId } = {}) =>
     dispatch => {
         httpFetch = httpFetch || new HttpFetch()
-        return httpFetch.get('/dailytask/list')
+        return httpFetch.get('/dailytask/list', { playerId, taskStateId })
             .then(resp => {
                 const { stateDataArray, dailyTaskStateUUID, today, rewardList } = resp.data
                 dispatch(setTaskPanelInfoAction({ stateDataArray, dailyTaskStateUUID, today, rewardList }))
@@ -27,10 +27,10 @@ export const getTaskPanelInfoAction = ({ httpFetch } = {}) =>
             })
     }
 // 任务列表数据
-export const getDailyTaskInfoAction = ({ httpFetch } = {}) =>
+export const getDailyTaskInfoAction = ({ httpFetch, playerId } = {}) =>
     dispatch => {
         httpFetch = httpFetch || new HttpFetch()
-        return httpFetch.get('/dailytask/task')
+        return httpFetch.get('/dailytask/task', { playerId })
             .then(resp => {
                 const { taskList } = resp.data
                 dispatch(setDailyTaskInfoAction({ taskList }))
